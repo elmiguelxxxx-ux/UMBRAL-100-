@@ -1,0 +1,503 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
+/* Fuentes propias (subidas por el usuario), servidas desde /public/fonts */
+@font-face {
+  font-family: 'Prime';
+  src: url('/fonts/Prime-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Prime';
+  src: url('/fonts/Prime-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BW Quinta Pro';
+  src: url('/fonts/BwQuintaPro-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BW Quinta Pro';
+  src: url('/fonts/BwQuintaPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BW Quinta Pro';
+  src: url('/fonts/BwQuintaPro-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BW Quinta Pro';
+  src: url('/fonts/BwQuintaPro-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ailerons';
+  src: url('/fonts/Ailerons.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-ailerons {
+  font-family: 'Ailerons', 'Geist', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+:root {
+  --bg-app: #F4F3ED;       /* Lienzo crema/lino cálido uniforme */
+  --bg-card: #FFFDF8;      /* Tarjetas */
+  --bg-sidebar: #ECE9E1;   /* Sidebar */
+  --bg-hover: #ECE7D9;
+  --text-primary: #1F2328;
+  --text-secondary: #55534D; /* Texto y navegación sobre fondo claro */
+  --border-color: #E5E1D8; /* Línea divisoria de la barra superior */
+  --accent-green: #639922; /* Verde acento de marca */
+  --btn-primary: #1F2A17;  /* Botón principal */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Variables de La Figura concéntrica — Modo Claro */
+  --fig-card-bg: #FFFFFF;    /* Fondo blanco puro */
+  --fig-umbral-bg: #F8F7F2;  /* Panel umbral claro */
+  --fig-mission-bg: #F2EFE8; /* Panel misión claro */
+  --fig-tool-bg: #EAE6DC;    /* Panel herramienta claro */
+  --fig-evidence-bg: #E0DDD2;/* Panel evidencia claro */
+  --fig-dark-border: #D5D0C3;/* Borde perimetral arquitectónico definido */
+  --fig-inner-border: #E3DFD5;
+  --fig-deep-border: #DDD8CD;
+  --fig-evidence-border: 1px solid #CCC7BA;
+  --fig-dark-ink: #1F2328;
+  --fig-dark-mute: #6C6B64;
+  --fig-card-shadow: 0 16px 40px -12px rgba(45, 40, 30, 0.1), 0 2px 6px -1px rgba(45, 40, 30, 0.04);
+  --fig-card-radius: 12px;
+  --fig-umbral-radius: 8px;
+  --fig-mission-radius: 6px;
+  --fig-tool-radius: 4px;
+
+  --fig-ink: var(--text-primary);
+  --fig-mute: var(--text-secondary);
+  --fig-line: #D5D0C3;
+  --fig-accent: #639922;
+  --fig-partial: #E8DCC2;
+  --ambient-halo: radial-gradient(circle, rgba(220, 212, 195, 0.5) 0%, rgba(244, 243, 237, 0) 70%);
+}
+
+:root[data-font='lexend'] {
+  --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root[data-font='prime'] {
+  --font-family: 'Prime', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root[data-font='quinta'] {
+  --font-family: 'BW Quinta Pro', 'Georgia', 'Iowan Old Style', ui-serif, serif;
+}
+
+:root[data-theme='dark'],
+html.dark {
+  --bg-app: #000000;       /* Negro sólido */
+  --bg-sidebar: #09090B;
+  --bg-card: #121214;
+  --bg-hover: #1C1C1F;
+  --text-primary: #F4F4F5;
+  --text-secondary: #A1A1AA;
+  --border-color: #222225;
+  color-scheme: dark;
+
+  /* Variables de La Figura concéntrica — Modo Oscuro */
+  --fig-card-bg: #15171a;    /* Grafito oscuro */
+  --fig-umbral-bg: #101214;  /* Panel umbral oscuro */
+  --fig-mission-bg: #0C0D0F; /* Panel misión oscuro */
+  --fig-tool-bg: #08090A;    /* Panel herramienta oscuro */
+  --fig-evidence-bg: #050506;/* Panel evidencia oscuro */
+  --fig-dark-border: #23272d;/* Borde sutil */
+  --fig-inner-border: #1C1F24;
+  --fig-deep-border: #181A1E;
+  --fig-evidence-border: 1px solid #141619;
+  --fig-dark-ink: #F5F5F5;
+  --fig-dark-mute: #A7ADB5;
+  --fig-card-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.7), 0 2px 6px -1px rgba(0, 0, 0, 0.5);
+  --fig-card-radius: 12px;
+  --fig-umbral-radius: 8px;
+  --fig-mission-radius: 6px;
+  --fig-tool-radius: 4px;
+
+  --fig-ink: var(--text-primary);
+  --fig-mute: var(--text-secondary);
+  --fig-line: #23272d;
+  --fig-accent: #639922;
+  --fig-partial: #E8DCC2;
+  --ambient-halo: radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, rgba(21, 23, 26, 0.6) 45%, rgba(0, 0, 0, 0) 70%);
+}
+
+html, body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  transition: 
+    background-color 1.25s cubic-bezier(0.4, 0, 0.2, 1), 
+    color 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sincronización continua de color sólido GPU a 1.25s cubic-bezier(0.4, 0, 0.2, 1) */
+html,
+body,
+#root,
+header,
+main,
+nav,
+footer,
+[class*="bg-[var(--bg-app)"],
+[class*="bg-[var(--fig-"],
+[class*="border-[var(--"],
+[class*="text-[var(--"] {
+  transition: 
+    background-color 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    color 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 1.25s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 1.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Theme layer: existing utility colors remapped dynamically with high contrast */
+[data-theme='dark'] body,
+html.dark body,
+[data-theme='dark'] #root,
+html.dark #root {
+  background-color: var(--bg-app) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme='dark'] .bg-\[\#FBFBFB\],
+html.dark .bg-\[\#FBFBFB\],
+[data-theme='dark'] .bg-\[\#F8F5EE\],
+html.dark .bg-\[\#F8F5EE\] {
+  background-color: var(--bg-app) !important;
+}
+
+[data-theme='dark'] .bg-\[\#F3F0E7\],
+html.dark .bg-\[\#F3F0E7\] {
+  background-color: var(--bg-sidebar) !important;
+}
+
+[data-theme='dark'] .bg-\[\#FFFDF8\],
+html.dark .bg-\[\#FFFDF8\] {
+  background-color: var(--bg-card) !important;
+}
+
+[data-theme='dark'] .border-\[\#E7E2D3\],
+html.dark .border-\[\#E7E2D3\],
+[data-theme='dark'] .border-\[\#E6DECA\],
+html.dark .border-\[\#E6DECA\] {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme='dark'] .bg-white,
+html.dark .bg-white {
+  background-color: var(--bg-card) !important;
+}
+
+[data-theme='dark'] .bg-\[\#F7F6F3\],
+html.dark .bg-\[\#F7F6F3\],
+[data-theme='dark'] .bg-\[\#FAFAF9\],
+html.dark .bg-\[\#FAFAF9\],
+[data-theme='dark'] .bg-\[\#FAF9F6\],
+html.dark .bg-\[\#FAF9F6\],
+[data-theme='dark'] .bg-\[\#FAF9F7\],
+html.dark .bg-\[\#FAF9F7\],
+[data-theme='dark'] .bg-\[\#F9F9F8\],
+html.dark .bg-\[\#F9F9F8\],
+[data-theme='dark'] .bg-\[\#F8FAFC\],
+html.dark .bg-\[\#F8FAFC\] {
+  background-color: var(--bg-sidebar) !important;
+}
+
+[data-theme='dark'] .bg-\[\#F4F4F5\],
+html.dark .bg-\[\#F4F4F5\],
+[data-theme='dark'] .bg-\[\#F4F3EF\],
+html.dark .bg-\[\#F4F3EF\],
+[data-theme='dark'] .bg-\[\#F0EFEA\],
+html.dark .bg-\[\#F0EFEA\],
+[data-theme='dark'] .bg-\[\#EFECE6\],
+html.dark .bg-\[\#EFECE6\] {
+  background-color: var(--bg-card) !important;
+}
+
+[data-theme='dark'] .bg-\[\#EAEAEA\],
+html.dark .bg-\[\#EAEAEA\],
+[data-theme='dark'] .bg-\[\#EAE8E3\],
+html.dark .bg-\[\#EAE8E3\],
+[data-theme='dark'] .bg-\[\#E4E4E7\],
+html.dark .bg-\[\#E4E4E7\],
+[data-theme='dark'] .bg-\[\#DFDFDF\],
+html.dark .bg-\[\#DFDFDF\],
+[data-theme='dark'] .bg-\[\#DDD9CE\],
+html.dark .bg-\[\#DDD9CE\] {
+  background-color: var(--bg-hover) !important;
+}
+
+/* Primary buttons and active badges in dark mode */
+[data-theme='dark'] button.bg-\[\#1F2328\],
+html.dark button.bg-\[\#1F2328\],
+[data-theme='dark'] button.bg-\[\#18181B\],
+html.dark button.bg-\[\#18181B\],
+[data-theme='dark'] .badge.bg-\[\#1F2328\],
+html.dark .badge.bg-\[\#1F2328\] {
+  background-color: #27272A !important;
+  color: #FFFFFF !important;
+  border-color: #3F3F46 !important;
+}
+
+/* Hover states in dark mode */
+[data-theme='dark'] .hover\:bg-\[\#EAE8E3\]:hover,
+html.dark .hover\:bg-\[\#EAE8E3\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#F4F3EF\]:hover,
+html.dark .hover\:bg-\[\#F4F3EF\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#EAEAEA\]:hover,
+html.dark .hover\:bg-\[\#EAEAEA\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#E9E8E4\]:hover,
+html.dark .hover\:bg-\[\#E9E8E4\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#DFDFDF\]:hover,
+html.dark .hover\:bg-\[\#DFDFDF\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#F7F6F3\]:hover,
+html.dark .hover\:bg-\[\#F7F6F3\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#FAF9F6\]:hover,
+html.dark .hover\:bg-\[\#FAF9F6\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#FBFBFB\]:hover,
+html.dark .hover\:bg-\[\#FBFBFB\]:hover,
+[data-theme='dark'] .hover\:bg-white:hover,
+html.dark .hover\:bg-white:hover {
+  background-color: var(--bg-hover) !important;
+}
+
+/* Text colors */
+[data-theme='dark'] .text-\[\#1F2328\],
+html.dark .text-\[\#1F2328\],
+[data-theme='dark'] .text-\[\#18181B\],
+html.dark .text-\[\#18181B\],
+[data-theme='dark'] .text-\[\#2D3139\],
+html.dark .text-\[\#2D3139\],
+[data-theme='dark'] .text-\[\#3F3F46\],
+html.dark .text-\[\#3F3F46\],
+[data-theme='dark'] .text-\[\#334155\],
+html.dark .text-\[\#334155\],
+[data-theme='dark'] .text-\[\#37352F\],
+html.dark .text-\[\#37352F\] {
+  color: var(--text-primary) !important;
+}
+
+[data-theme='dark'] .text-\[\#787774\],
+html.dark .text-\[\#787774\],
+[data-theme='dark'] .text-\[\#71717A\],
+html.dark .text-\[\#71717A\],
+[data-theme='dark'] .text-\[\#9B9A97\],
+html.dark .text-\[\#9B9A97\],
+[data-theme='dark'] .text-\[\#A1A1AA\],
+html.dark .text-\[\#A1A1AA\],
+[data-theme='dark'] .text-\[\#5A5A58\],
+html.dark .text-\[\#5A5A58\],
+[data-theme='dark'] .text-\[\#B0ADA7\],
+html.dark .text-\[\#B0ADA7\],
+[data-theme='dark'] .text-\[\#B4B3B0\],
+html.dark .text-\[\#B4B3B0\] {
+  color: var(--text-secondary) !important;
+}
+
+/* Borders */
+[data-theme='dark'] .border-\[\#E9E8E4\],
+html.dark .border-\[\#E9E8E4\],
+[data-theme='dark'] .border-\[\#F0EFEA\],
+html.dark .border-\[\#F0EFEA\],
+[data-theme='dark'] .border-\[\#E4E4E7\],
+html.dark .border-\[\#E4E4E7\],
+[data-theme='dark'] .border-\[\#F4F3EF\],
+html.dark .border-\[\#F4F3EF\],
+[data-theme='dark'] .border-\[\#F8FAFC\],
+html.dark .border-\[\#F8FAFC\],
+[data-theme='dark'] .border-\[\#CCC9BF\],
+html.dark .border-\[\#CCC9BF\],
+[data-theme='dark'] .border-\[\#D0CFC9\],
+html.dark .border-\[\#D0CFC9\],
+[data-theme='dark'] .border-\[\#F0EFEB\],
+html.dark .border-\[\#F0EFEB\],
+[data-theme='dark'] .border-\[\#F0F0EE\],
+html.dark .border-\[\#F0F0EE\],
+[data-theme='dark'] .border-\[\#F4F4F5\],
+html.dark .border-\[\#F4F4F5\] {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme='dark'] input,
+html.dark input,
+[data-theme='dark'] textarea,
+html.dark textarea,
+[data-theme='dark'] select,
+html.dark select {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-sidebar) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme='dark'] ::selection,
+html.dark ::selection {
+  background: #4F46E5;
+  color: white;
+}
+
+/* Scrollbar styling in dark mode */
+[data-theme='dark'] ::-webkit-scrollbar,
+html.dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb,
+html.dark ::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 4px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-track,
+html.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Canvas dark mode enhancements */
+[data-theme='dark'] .canvas-node,
+html.dark .canvas-node {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+[data-theme='dark'] .canvas-node .text-\[\#18181B\],
+html.dark .canvas-node .text-\[\#18181B\] {
+  color: var(--text-primary);
+}
+[data-theme='dark'] svg .canvas-edge,
+html.dark svg .canvas-edge {
+  stroke: #52525B;
+}
+
+/* Capa de texto real de pdf.js sobre el <canvas> del visor de PDF original:
+   texto invisible pero posicionado y dimensionado exactamente igual que el
+   texto dibujado, para poder seleccionarlo/copiarlo.
+   OJO: este proyecto usa la API legacy de pdf.js (renderTextLayer), que
+   posiciona cada palabra con su propio top/left/fontSize en píxeles exactos
+   calculados por JS. NO usar las reglas "top:0; height:100%" de la versión
+   moderna de pdf.js (agrupa por línea) — pisan el alto real de cada span y
+   lo estiran a toda la página, rompiendo la selección. */
+.textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  opacity: 1;
+  line-height: 1;
+  text-align: initial;
+  transform-origin: 0 0;
+  z-index: 0;
+}
+
+.textLayer span,
+.textLayer br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+/* Elemento interno que pdf.js agrega automáticamente para manejar bien la
+   selección "hasta el final de la página" (arrastrar el mouse más abajo del
+   último párrafo). Sin este estilo, la selección puede saltar o verse
+   cortada de forma rara cerca del final del texto. */
+.textLayer .endOfContent {
+  display: block;
+  position: absolute;
+  inset: 100% 0 0;
+  z-index: -1;
+  cursor: default;
+  user-select: none;
+}
+
+.textLayer .endOfContent.active {
+  top: 0;
+}
+
+.textLayer ::-moz-selection {
+  background: rgba(147, 197, 235, 0.75);
+}
+
+.textLayer ::selection {
+  background: rgba(147, 197, 235, 0.75);
+}
+
+.textLayer br::-moz-selection,
+.textLayer br::selection {
+  background: transparent;
+
+}
+
+/* Subtle box-shadow for cards without heavy borders */
+.hepta-card {
+  background-color: #FFFDF8;
+  border-radius: 8px;
+  border: 1px solid #E7E2D3;
+  box-shadow: 0 4px 12px rgba(31, 42, 23, 0.05), 0 1px 3px rgba(31, 42, 23, 0.04);
+}
+
+/* Button style with #EAEAEA background */
+.hepta-btn-neutral {
+  background-color: #EAEAEA;
+  color: #1F2328;
+  border-radius: 7px;
+  transition: background-color 0.15s ease;
+}
+.hepta-btn-neutral:hover {
+  background-color: #DFDFDF;
+}
+
+/* Reemplazo de superficies claras por el tono blanco cálido #FFFDF8 de la paleta */
+html:not(.dark):not([data-theme='dark']) .bg-white,
+:root:not([data-theme='dark']) .bg-white {
+  background-color: #FFFDF8 !important;
+}
+
+html:not(.dark):not([data-theme='dark']) .hover\:bg-white:hover,
+:root:not([data-theme='dark']) .hover\:bg-white:hover {
+  background-color: #F8F5EE !important;
+}
+
+html:not(.dark):not([data-theme='dark']) .bg-\[\#FFFFFF\],
+:root:not([data-theme='dark']) .bg-\[\#FFFFFF\] {
+  background-color: #FFFDF8 !important;
+}
+
+/* El lienzo y áreas de fondo adoptan #F8F5EE de la paleta */
+html:not(.dark):not([data-theme='dark']) .bg-\[\#FBFBFB\],
+:root:not([data-theme='dark']) .bg-\[\#FBFBFB\] {
+  background-color: #F8F5EE !important;
+}
+
+[data-theme='dark'] .hepta-card,
+html.dark .hepta-card {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}

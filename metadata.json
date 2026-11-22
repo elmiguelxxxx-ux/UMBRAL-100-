@@ -1,0 +1,7 @@
+{
+  "name": "Umbral",
+  "description": "Plataforma de estudio y aprendizaje activo con visor de documentos, canvas infinito, flashcards FSRS y War Log.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
